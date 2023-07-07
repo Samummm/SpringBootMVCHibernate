@@ -1,18 +1,24 @@
 package com.mogila.springbootmvchibernate.service;
 
 
-import com.mogila.springbootmvchibernate.dao.UserRepository;
+import com.mogila.springbootmvchibernate.repository.UserRepository;
 import com.mogila.springbootmvchibernate.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class UserServiceImp implements UserService {
 
-    @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    public UserServiceImp(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public void saveUser(User user) {
